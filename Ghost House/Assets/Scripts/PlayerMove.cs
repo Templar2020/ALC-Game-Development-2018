@@ -3,6 +3,10 @@ using System.Collections;
 
 public class PlayerMove : MonoBehaviour {
 
+	public int waterBottle = 15;
+
+
+
 	// Use this for initialization
 	void Start () {
 	
