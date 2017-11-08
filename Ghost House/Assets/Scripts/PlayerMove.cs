@@ -6,7 +6,9 @@ public class PlayerMove : MonoBehaviour {
 	public float turnSpeed;
 	public float jumpHeight;
 
-	
+	void Start(){
+		GetComponent<Rigidbody>().freezeRotation = true;
+	}
 	
 	void Update () {
 		var j = Input.GetAxis("Jump")* Time.deltaTime * jumpHeight;

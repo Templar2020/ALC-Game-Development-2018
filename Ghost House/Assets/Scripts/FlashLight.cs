@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class FlashLight : MonoBehaviour {
 
-	public bool lightOn;
+	public bool lightOn = true;
 
 	Light light;
 
@@ -16,6 +16,7 @@ public class FlashLight : MonoBehaviour {
 		light = GetComponent<Light> ();
 		// Set Light default to ON
 		lightOn = true;
+		print("Turn light on when Flashlight is initiated");
 		light.enabled = true;
 	}
 
@@ -23,14 +24,24 @@ public class FlashLight : MonoBehaviour {
 	void Update () {
 		// Toggle light on/off when L key is pressed.
 		if (Input.GetKeyUp (KeyCode.L) && lightOn) {
+			print("Light Off");
 			lightOn = false;
 			light.enabled = false;
 			
 		}
 
-		else if (Input.GetKeyUp (KeyCode.L) && !lightOn){			
+		else if (Input.GetKeyUp (KeyCode.L) && !lightOn){
+			print("Light On");			
 			lightOn = true;
 			light.enabled = true;
 		}
 	}
+	public void setLightOn(){
+		lightOn = true;
+	}
+
+	public bool isLightOn(){
+		return lightOn;
+	}
+
 }
