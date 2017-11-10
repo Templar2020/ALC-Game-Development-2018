@@ -35,15 +35,15 @@ public class GhostStun : MonoBehaviour {
 			//  other.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
 			other.GetComponent<GhostAI>().moveSpeed = 0f;
-			StartCoroutine(Wait(5));
+			StartCoroutine(Wait(5, other));
 			// StopCoroutine(Wait(5));
 			
 		}
 	}
 	
-	IEnumerator Wait(float time){
+	IEnumerator Wait(float time, Collider other){
 			yield return new WaitForSeconds(time);
-			ghost.GetComponent<GhostAI>().moveSpeed = 5f;
+			other.gameObject.GetComponent<GhostAI>().moveSpeed = 5f;
 			print("Ghost is unstunned");
 			
 	}
