@@ -4,6 +4,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FlashLight : MonoBehaviour {
 
@@ -13,7 +14,13 @@ public class FlashLight : MonoBehaviour {
 	// Useable flashlight power
 	public int currentPower;
 
+	public int batDrainAmt;
+
+	public float batDrainDelay;
+
 	Light light;
+
+	public Text batteryText;
 
 	// Use this for initialization
 	void Start () {
@@ -43,13 +50,34 @@ public class FlashLight : MonoBehaviour {
 			lightOn = true;
 			light.enabled = true;
 		}
+
+		//Update Battery UI text
+		batteryText.text = currentPower.ToString();
+
+		//Drain Battery Life
+		if(currentPower > 0){
+			StartCoroutine(BatteryDrain(batDrainDelay,batDrainAmt));
+		}
 	}
+
 	public void setLightOn(){
 		lightOn = true;
 	}
 
 	public bool isLightOn(){
 		return lightOn;
+	
+	}
+
+	IEnumerator BatteryDrain(float delay, int amount){
+		yield return new WaitForSeconds(delay);
+		currentPower -= amount;
+		if(currentPower <= 0){
+			currentPower = 0;
+			print("Battery is dead!");
+			light.enabled = false;
+
+		}
 	}
 
 }
