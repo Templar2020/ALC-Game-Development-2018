@@ -20,6 +20,7 @@ public class FlashLight : MonoBehaviour {
 
 	Light light;
 
+	// Gets Battery UI Text
 	public Text batteryText;
 
 	// Use this for initialization
