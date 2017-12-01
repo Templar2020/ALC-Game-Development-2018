@@ -8,19 +8,24 @@ using UnityEngine.UI;
 
 public class FlashLight : MonoBehaviour {
 
+
+	// Flashlight on / off 
 	public bool lightOn = true;
 	// Flashlight power capacity
 	public int maxPower = 4;
 	// Useable flashlight power
 	public int currentPower;
-
+	// Flashlight Drain Amount
 	public int batDrainAmt;
-
+	// Flashlight Drain Delay
 	public float batDrainDelay;
-
+	// Stores light object
 	Light light;
-
-	// Gets Battery UI Text
+	// Battery drain on/off
+	bool draining = false;
+	//Count integer
+	long count = 0;
+	// Battery UI Text
 	public Text batteryText;
 
 	// Use this for initialization
@@ -28,7 +33,7 @@ public class FlashLight : MonoBehaviour {
 		//Add power to flashlight
 		currentPower = maxPower;
 		print("Power = " + currentPower);
-
+		// Get Light
 		light = GetComponent<Light> ();
 		// Set Light default to ON
 		lightOn = true;
@@ -55,10 +60,14 @@ public class FlashLight : MonoBehaviour {
 		//Update Battery UI text
 		batteryText.text = currentPower.ToString();
 
-		//Drain Battery Life
+		
 		if(currentPower > 0){
 			StartCoroutine(BatteryDrain(batDrainDelay,batDrainAmt));
 		}
+	}
+	//Drain Battery Life
+	void battery_Drain(){
+
 	}
 
 	public void setLightOn(){
