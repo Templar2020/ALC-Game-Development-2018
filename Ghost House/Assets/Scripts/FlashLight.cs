@@ -61,33 +61,43 @@ public class FlashLight : MonoBehaviour {
 		batteryText.text = currentPower.ToString();
 
 		
-		if(currentPower > 0){
-			StartCoroutine(BatteryDrain(batDrainDelay,batDrainAmt));
+		if(currentPower > 0 && lightOn){
+			if(!draining){			
+				StartCoroutine(BatteryDrain(batDrainDelay,batDrainAmt));
+			}
+			else if(currentPower <= 0){
+				lightOn = false;
+				light.enabled = false;
+			}
 		}
-	}
-	//Drain Battery Life
-	void battery_Drain(){
-
-	}
-
+	}	
+	// Turns light on when called
 	public void setLightOn(){
 		lightOn = true;
 	}
-
+	// Returns if light is on
 	public bool isLightOn(){
 		return lightOn;
 	
 	}
-
+	//Drain Battery Life
 	IEnumerator BatteryDrain(float delay, int amount){
-		yield return new WaitForSeconds(delay);
-		currentPower -= amount;
+		if(lightOn){
+			draining = true;
+			yield return new WaitForSeconds(delay);
+			print(currentPower);
+			currentPower -= amount;
+		}
+		
+		
 		if(currentPower <= 0){
 			currentPower = 0;
 			print("Battery is dead!");
 			light.enabled = false;
 
 		}
+
+		draining = false;
 	}
 
 }
