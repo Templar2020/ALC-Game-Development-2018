@@ -7,9 +7,13 @@ public class Battery : MonoBehaviour {
 
 	public GameObject flashlight;
 
+	GameObject player;
+
 	// Use this for initialization
 	void Start () {
-	
+		player =  GameObject.FindWithTag("Player");
+
+		flashlight = player;
 	}
 	
 	// Update is called once per frame
