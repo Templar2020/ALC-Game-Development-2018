@@ -9,26 +9,25 @@ public class Battery : MonoBehaviour {
 
 	GameObject player;
 
-	// int checkBat;
+	int checkBat;
 
 	// Use this for initialization
 	void Start () {
 		player =  GameObject.FindWithTag("Player");
 
 		flashlight = player;
-
-		// checkBat = flashlight.gameObject.GetComponentInChildren<FlashLight>().currentPower;
-		// print("CkBat = "+checkBat);
+		 
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		checkBat = flashlight.gameObject.GetComponentInChildren<FlashLight>().currentPower;
+		 print("CkBat = "+checkBat);
 	}
 
 	void OnCollisionEnter(Collision other){
-		if(other.gameObject.tag == "Player" &&  flashlight.gameObject.GetComponentInChildren<FlashLight>().currentPower == 0){
+		if(other.gameObject.tag == "Player" &&  checkBat == 0){
 			flashlight.gameObject.GetComponentInChildren<FlashLight>().currentPower = power;
 			Destroy(gameObject);
 		}
