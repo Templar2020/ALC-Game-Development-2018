@@ -29,6 +29,7 @@ public class BatterySpawn : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		if(other.gameObject.tag == "Battery"){
+			print("Battery is in the trigger");
 			batSpawned = true;
 		}
 		else{
@@ -38,7 +39,7 @@ public class BatterySpawn : MonoBehaviour {
 	}
 
 	IEnumerator SpawnBat(float time, Rigidbody bat){
-		 yield return new WaitForSeconds(time);
+		yield return new WaitForSeconds(time);
 		Instantiate(bat, spawnPoint.position, spawnPoint.rotation);
 		batSpawned = true;
 		
